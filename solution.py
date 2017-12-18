@@ -9,7 +9,8 @@ square_units = [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','45
 
 # TODO: Update the unit list to add the new diagonal units
 d1_units = [[rows[i]+cols[i] for i in range(len(rows))]]
-d2_units = [[rows[i]+cols_rev[i] for i in range(len(rows))]]
+#d2_units = [[rows[i]+cols_rev[i] for i in range(len(rows))]]
+d2_units = [[rows[i]+cols[i] for i in range(len(rows))]]
 
 do_diagonal = 1 # Set this flag = 0 for non-diagonal sudoku
 if do_diagonal == 1:

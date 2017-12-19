@@ -29,15 +29,15 @@ def naked_twins(values):
                     for box2 in peers[box1] \
                     if set(values[box1])==set(values[box2]) ]
 
-        for box in unit:
-            if (box in naked_twins):
+    for box in unit:
+        if (box in naked_twins):
             # These 2 boxes must have only these 2 values
-                assign_value(values, box, values[box]) #values[box] = digits
+            assign_value(values, box, values[box]) #values[box] = digits
                             
-            else:
-                            # The rest of the boxes cannot have these digits
-                assign_value(values, box, values[box].replace(digits[0], ""))
-                assign_value(values, box, values[box].replace(digits[1], ""))
+    else:
+    # The rest of the boxes cannot have these digits
+    assign_value(values, box, values[box].replace(digits[0], ""))
+    assign_value(values, box, values[box].replace(digits[1], ""))
     
 
 def eliminate(values):

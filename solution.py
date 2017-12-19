@@ -26,7 +26,7 @@ def naked_twins(values):
     all_digits = '123456789'
    
 # First select boxes with 2 entries
-    potential_twins = [values[box] for box in values.keys() if len(values[box]) == 2]
+    potential_twins = [box for box in values.keys() if len(values[box]) == 2]
     # Collect boxes that have the same elements
     naked_twins = [[box1,box2] for box1 in potential_twins \
                     for box2 in peers[box1] \

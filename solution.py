@@ -24,21 +24,13 @@ peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 
 def naked_twins(values):
     all_digits = '123456789'
-    #all_match = [values[box] for box in values.keys() if len(values[box]) == 2]
-    #match_more_than_one = [selected_match for selected_match in all_match if all_match.count(selected_match)>1]
-    
-    # First select boxes with 2 entries
-    all_potential_twins = [values[box] for box in values.keys() if len(values[box]) == 2]
-
-    #naked_twins=[unitlist_orginal[i] for i in range(9) if all_potential_twins[i] == 2 and len(all_potential_twins[i]) == 2]
-    #naked_twins=[unitlist_orginal[i] for i in range(9) if all_potential_twins[i] == 2
-    #naked_twins=[u[i] for i in range(9) if l_val_c[i]==2 and len(l_val[i])==2]
+   
+# First select boxes with 2 entries
+    potential_twins = [box for box in values.keys() if len(values[box]) == 2]
     # Collect boxes that have the same elements
-    naked_twins = [[box1,box2] for box1 in all_potential_twins \
+    naked_twins = [[box1,box2] for box1 in potential_twins \
                     for box2 in peers[box1] \
                     if set(values[box1])==set(values[box2]) ]
-
-
 
     # For each pair of naked twins,
     for i in range(len(naked_twins)):
@@ -54,6 +46,8 @@ def naked_twins(values):
                 for rm_val in values[box1]:
                     values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
     return values
+
+
     
 
 def eliminate(values):

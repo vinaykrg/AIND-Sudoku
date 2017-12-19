@@ -25,6 +25,21 @@ def naked_twins(values):
     all_match = [values[box] for box in values.keys() if len(values[box]) == 2]
     match_more_than_one = [selected_match for selected_match in all_match if all_match.count(selected_match)>1]
 
+
+    # For each pair of naked twins,
+    for i in range(len(match_more_than_one)):
+        box1 = match_more_than_one[i][0]
+        box2 = nmatch_more_than_one[i][1]
+        # 1- compute intersection of peers
+        peers1 = set(peers[box1])
+        peers2 = set(peers[box2])
+        peers_int = peers1 & peers2
+        # 2- Delete the two digits in naked twins from all common peers.
+        for peer_val in peers_int:
+            if len(values[peer_val])>2:
+                for rm_val in values[box1]:
+                    values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
+    return values
     """Eliminate values using the naked twins strategy.
 
     Parameters
@@ -61,23 +76,7 @@ def naked_twins(values):
                     if set(values[box1])==set(values[box2]) ]
 """
 #-------------------------------------------------------------------------------------------------------
-    
 
-
-    # For each pair of naked twins,
-    for i in range(len(match_more_than_one)):
-        box1 = match_more_than_one[i][0]
-        box2 = nmatch_more_than_one[i][1]
-        # 1- compute intersection of peers
-        peers1 = set(peers[box1])
-        peers2 = set(peers[box2])
-        peers_int = peers1 & peers2
-        # 2- Delete the two digits in naked twins from all common peers.
-        for peer_val in peers_int:
-            if len(values[peer_val])>2:
-                for rm_val in values[box1]:
-                    values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
-    return values
 
 
 

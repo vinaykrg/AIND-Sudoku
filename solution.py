@@ -134,12 +134,9 @@ def only_choice(values):
 
     for unit in unitlist:
         for digit in cols:
-            # get all boxes in the unit that have the digit
-            boxes_with_digit = [box for box in unit if digit in values[box]]
-            # if there is only 1 box, update it
-            if len(boxes_with_digit) == 1:
-                assign_value(values, boxes_with_digit[0], digit) 
-                # values[boxes_with_digit[0]] = digit
+            Box_OneValue = [box for box in unit if digit in values[box]]
+            if len(Box_OneValue) == 1:
+                assign_value(values, Box_OneValue[0], digit) 
     return values
     #raise NotImplementedError
 

@@ -22,17 +22,33 @@ peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 
 
 def naked_twins(values):
-    """Eliminate values using the naked twins strategy only on the columns.
+    """Eliminate values using the naked twins strategy.
 
-    Args:
-        values(dict): a dictionary of the form {'box_name': '123456789', ...}
+    Parameters
+    ----------
+    values(dict)
+        a dictionary of the form {'box_name': '123456789', ...}
 
-    Returns:
-        the values dictionary with the naked twins eliminated from peers.
+    Returns
+    -------
+    dict
+        The values dictionary with the naked twins eliminated from peers
+
+    Notes
+    -----
+    Your solution can either process all pairs of naked twins from the input once,
+    or it can continue processing pairs of naked twins until there are no such
+    pairs remaining -- the project assistant test suite will accept either
+    convention. However, it will not accept code that does not process all pairs
+    of naked twins from the original input. (For example, if you start processing
+    pairs of twins and eliminate another pair of twins before the second pair
+    is processed then your code will fail the PA test suite.)
+
+    The first convention is preferred for consistency with the other strategies,
+    and because it is simpler (since the reduce_puzzle function already calls this
+    strategy repeatedly).
     """
-
-    # Find all instances of naked twins
-    # Eliminate the naked twins as possibilities for their peers
+    # TODO: Implement this function!
 
     all_digits = '123456789'
     
@@ -64,6 +80,7 @@ def naked_twins(values):
                             # values[box] = values[box].replace(digits[0], "")
                             # values[box] = values[box].replace(digits[1], "")
     return values
+    #raise NotImplementedError
 
 def eliminate(values):
     """

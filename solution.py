@@ -110,11 +110,27 @@ def eliminate(values):
     #raise NotImplementedError
 
 def only_choice(values):
+    """Apply the only choice strategy to a Sudoku puzzle
+
+    The only choice strategy says that if only one box in a unit allows a certain
+    digit, then that box must be assigned that digit.
+
+    Parameters
+    ----------
+    values(dict)
+        a dictionary of the form {'box_name': '123456789', ...}
+
+    Returns
+    -------
+    dict
+        The values dictionary with all single-valued boxes assigned
+
+    Notes
+    -----
+    You should be able to complete this function by copying your code from the classroom
     """
-    Go through all the units, and whenever there is a unit with a value that only fits in one box, assign the value to this box.
-    Input: A sudoku in dictionary form.
-    Output: The resulting sudoku in dictionary form.
-    """
+    # TODO: Copy your code from the classroom to complete this function
+
     all_digits = '123456789'
 
     for unit in unitlist:
@@ -126,6 +142,7 @@ def only_choice(values):
                 assign_value(values, boxes_with_digit[0], digit) 
                 # values[boxes_with_digit[0]] = digit
     return values
+    #raise NotImplementedError
 
 def reduce_puzzle(values):
     solved_values = [box for box in values.keys() if len(values[box]) == 1]

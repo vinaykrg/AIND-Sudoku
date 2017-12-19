@@ -24,52 +24,36 @@ peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 
 def naked_twins(values):
 # First select boxes with 2 entries
-    all_possible_naked_twins_values = [values[box] for box in values.keys() if len(values[box]) == 2]
-    # Collect boxes that have the same elements
-    #naked_twins = [[box1,box2] for box1 in potential_twins \
-    #                for box2 in peers[box1] \
-    #                if set(values[box1])==set(values[box2]) ]
+    #all_possible_naked_twins_values = [values[box] for box in values.keys() if len(values[box]) == 2]
 
     # then we use those values and isolate only the ones that appears more than once on the board: our candidates
-    candidate_naked_twins_values = [candidate for candidate in all_possible_naked_twins_values
-                                    if all_possible_naked_twins_values.count(candidate)>1]
+    for unit in row_units + column_units + square_units:
+        d = dict()
+        for digit in all_digits:
+            # get all boxes in the unit that have the digit
+            boxes_with_digit = ''.join([box for box in unit if digit in values[box]])
+            # if a digit is only in 2 boxes:
+            if len(boxes_with_digit) == 4:
+                # Insert the concatenated boxes names as the key in a dictionary with digit as the value 
+                if (boxes_with_digit not in d.keys()): 
+                    # print('inserting:', digit, ' in ', boxes_with_digit)
+                    d[boxes_with_digit] = digit
+                # If the concatenated boxes names are already in the dictionary, we have a twin!
+                else:
+                    digits = d[boxes_with_digit] + digit
+                    # print('updating:', digits, ' in ', boxes_with_digit)
 
-    # with our candidates, we iterate through our unitlist and find units that have square with the candidate values
-    units_with_candidates = [u for u in unitlist for candidate in candidate_naked_twins_values for s in u
-                             if values[s]==candidate]
-
-
-
-    #naked_twins = [[box1,box2] for box1 in all_possible_naked_twins_values \
-    #                for box2 in peers[box1] \
-    #                if set(values[box1])==set(values[box2]) ]
-
-
-    # once we isolated the possible units with our candidate values, we get a list of all values for that unit
-    units_with_candidates_values_list = dict(("+".join(u), [values[s] for s in u]) for u in units_with_candidates)
-
-    # with the unit value list, we confirm our naked-twins by verifying that they occur more than once in a unit
-    #    and add them to our list.
-    naked_twin_list = [twins for twins in candidate_naked_twins_values for u in units_with_candidates
-                       if units_with_candidates_values_list["+".join(u)].count(twins)>1] 
-
-    # with the confirmed set of naked-twins, we search the units that have them and add them to a dictionary
-    units_with_naked_twins = dict(("+".join(u),naked) for u in units_with_candidates for naked in naked_twin_list
-                                   if units_with_candidates_values_list["+".join(u)].count(naked)>1)
-    
-    # Eliminate the naked twins as possibilities for their peers
-    # we already have the list of units and the naked-twins associated with them in our dictionary
-    for naked_unit in units_with_naked_twins.keys():
-        naked = units_with_naked_twins[naked_unit]
-
-        # we just need to iterate through them and for squares that are not the ones with the naked-twins values,
-        for box in naked_unit.split('+'):
-
-            # if the boxes are not part of the naked-twins.
-            if values[box] != naked:
-                for digit in naked:
-                    # remove the digits from boxes that are not part of the naked-twins.  DONE!
-                    values = assign_value(values, box, values[box].replace(digit,''))
+                    for box in unit:
+                        if (box in boxes_with_digit):
+                            # These 2 boxes must have only these 2 values
+                            assign_value(values, box, digits) #values[box] = digits
+                            
+                        else:
+                            # The rest of the boxes cannot have these digits
+                            assign_value(values, box, values[box].replace(digits[0], ""))
+                            assign_value(values, box, values[box].replace(digits[1], ""))
+                            # values[box] = values[box].replace(digits[0], "")
+                            # values[box] = values[box].replace(digits[1], "")
     return values
 
 def eliminate(values):

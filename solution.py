@@ -29,7 +29,10 @@ def naked_twins(values):
                     for box2 in peers[box1] \
                     if set(values[box1])==set(values[box2]) ]
 
-    # For each pair of naked twins,
+    
+
+
+    """
     for i in range(len(naked_twins)):
         box1 = naked_twins[i][0]
         box2 = naked_twins[i][1]
@@ -38,12 +41,25 @@ def naked_twins(values):
         peers2 = set(peers[box2])
         peers_int = peers1 & peers2
         # 2- Delete the two digits in naked twins from all common peers.
+    """
+        for box in unit:
+            if (box in naked_twins):
+            # These 2 boxes must have only these 2 values
+                assign_value(values, box, values[box]) #values[box] = digits
+                            
+            else:
+                            # The rest of the boxes cannot have these digits
+                assign_value(values, box, values[box].replace(digits[0], ""))
+                assign_value(values, box, values[box].replace(digits[1], ""))
+
+
+"""
         for peer_val in peers_int:
             if len(values[peer_val])>2:
                 for rm_val in values[box1]:
                     values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
     return values
-
+"""
 
     
 

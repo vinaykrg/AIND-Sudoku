@@ -145,6 +145,21 @@ def only_choice(values):
     #raise NotImplementedError
 
 def reduce_puzzle(values):
+        """Reduce a Sudoku puzzle by repeatedly applying all constraint strategies
+
+    Parameters
+    ----------
+    values(dict)
+        a dictionary of the form {'box_name': '123456789', ...}
+
+    Returns
+    -------
+    dict or False
+        The values dictionary after continued application of the constraint strategies
+        no longer produces any changes, or False if the puzzle is unsolvable 
+    """
+    # TODO: Copy your code from the classroom and modify it to complete this function
+
     solved_values = [box for box in values.keys() if len(values[box]) == 1]
     stalled = False
     while not stalled:
@@ -164,6 +179,7 @@ def reduce_puzzle(values):
         if len([box for box in values.keys() if len(values[box]) == 0]):
             return False
     return values
+    #raise NotImplementedError
 
 def search(values):
     "Using depth-first search and propagation, create a search tree and solve the sudoku."

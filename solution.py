@@ -182,8 +182,28 @@ def reduce_puzzle(values):
     #raise NotImplementedError
 
 def search(values):
-    "Using depth-first search and propagation, create a search tree and solve the sudoku."
-    # First, reduce the puzzle using the previous function
+    """Apply depth first search to solve Sudoku puzzles in order to solve puzzles
+    that cannot be solved by repeated reduction alone.
+
+    Parameters
+    ----------
+    values(dict)
+        a dictionary of the form {'box_name': '123456789', ...}
+
+    Returns
+    -------
+    dict or False
+        The values dictionary with all boxes assigned or False
+
+    Notes
+    -----
+    You should be able to complete this function by copying your code from the classroom
+    and extending it to call the naked twins strategy.
+    """
+    # TODO: Copy your code from the classroom to complete this function
+
+
+
     values = reduce_puzzle(values)
     if values is False:
         return False

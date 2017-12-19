@@ -104,8 +104,7 @@ def eliminate(values):
     for box in solved_values:
         digit = values[box]
         for peer in peers[box]:
-            assign_value(values, peer, values[peer].replace(digit,'')) 
-            # values[peer] = values[peer].replace(digit,'')
+            assign_value(values, peer, values[peer].replace(digit,''))
     return values
     #raise NotImplementedError
 
@@ -131,10 +130,10 @@ def only_choice(values):
     """
     # TODO: Copy your code from the classroom to complete this function
 
-    all_digits = '123456789'
+    #all_digits = '123456789'
 
     for unit in unitlist:
-        for digit in all_digits:
+        for digit in cols:
             # get all boxes in the unit that have the digit
             boxes_with_digit = [box for box in unit if digit in values[box]]
             # if there is only 1 box, update it

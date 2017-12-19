@@ -13,6 +13,7 @@ square_units = [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','45
 diagonal_units_1 = [['A1', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'I9']]
 diagonal_units_2 = [['I1', 'H2', 'G3', 'F4', 'E5', 'D6', 'C7', 'B8', 'A9']]
 unitlist = row_units + column_units + square_units + diagonal_units_1 + diagonal_units_2
+unitlist_orginal = row_units + column_units + square_units
 
 # TODO: Update the unit list to add the new diagonal units
 unitlist = unitlist
@@ -27,13 +28,11 @@ def naked_twins(values):
     #match_more_than_one = [selected_match for selected_match in all_match if all_match.count(selected_match)>1]
     
     # First select boxes with 2 entries
-    potential_twins = [box for box in values.keys() if len(values[box]) == 2]
+    all_potential_twins = [box for box in values.keys() if len(values[box]) == 2]
 
-    naked_twins=[u[i] for i in range(9) if potential_twins[i] = len(potential_twins[i])]
+    #naked_twins=[unitlist_orginal[i] for i in range(9) if all_potential_twins[i] = len(potential_twins[i])]
     # Collect boxes that have the same elements
-    #naked_twins = [[box1,box2] for box1 in potential_twins \
-    #                for box2 in peers[box1] \
-    #                if set(values[box1])==set(values[box2]) ]
+    naked_twins = [[box1,box2] for box1 in all_potential_twins or (for box2 in peers[box1]) or (if set(values[box1])==set(values[box2])) ]
 
 
 

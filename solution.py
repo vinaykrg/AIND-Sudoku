@@ -30,9 +30,13 @@ def naked_twins(values):
     # First select boxes with 2 entries
     all_potential_twins = [box for box in values.keys() if len(values[box]) == 2]
 
-    #naked_twins=[unitlist_orginal[i] for i in range(9) if all_potential_twins[i] = len(potential_twins[i])]
+    #naked_twins=[unitlist_orginal[i] for i in range(9) if all_potential_twins[i] == 2 and len(all_potential_twins[i]) == 2]
+    naked_twins=[unitlist_orginal[i] for i in range(9) if all_potential_twins[i] == 2
+    #naked_twins=[u[i] for i in range(9) if l_val_c[i]==2 and len(l_val[i])==2]
     # Collect boxes that have the same elements
-    naked_twins = [[box1,box2] for box1 in all_potential_twins or (for box2 in peers[box1]) or (if set(values[box1])==set(values[box2])) ]
+    #naked_twins = [[box1,box2] for box1 in potential_twins \
+    #               for box2 in peers[box1] \
+    #              if set(values[box1])==set(values[box2]) ]
 
 
 

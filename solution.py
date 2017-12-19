@@ -35,8 +35,8 @@ def naked_twins(values):
                                     if all_possible_naked_twins_values.count(candidate)>1]
 
     # with our candidates, we iterate through our unitlist and find units that have square with the candidate values
-    #units_with_candidates = [u for u in unitlist for candidate in candidate_naked_twins_values for s in u
-    #                         if values[s]==candidate]
+    units_with_candidates = [u for u in unitlist for candidate in candidate_naked_twins_values for s in u
+                             if values[s]==candidate]
 
 
 
@@ -46,15 +46,15 @@ def naked_twins(values):
 
 
     # once we isolated the possible units with our candidate values, we get a list of all values for that unit
-    units_with_candidates_values_list = dict(("+".join(u), [values[s] for s in u]) for u in naked_twins)
+    units_with_candidates_values_list = dict(("+".join(u), [values[s] for s in u]) for u in units_with_candidates)
 
     # with the unit value list, we confirm our naked-twins by verifying that they occur more than once in a unit
     #    and add them to our list.
-    naked_twin_list = [twins for twins in candidate_naked_twins_values for u in naked_twins
+    naked_twin_list = [twins for twins in candidate_naked_twins_values for u in units_with_candidates
                        if units_with_candidates_values_list["+".join(u)].count(twins)>1] 
 
     # with the confirmed set of naked-twins, we search the units that have them and add them to a dictionary
-    units_with_naked_twins = dict(("+".join(u),naked) for u in naked_twins for naked in naked_twin_list
+    units_with_naked_twins = dict(("+".join(u),naked) for u in units_with_candidates for naked in naked_twin_list
                                    if units_with_candidates_values_list["+".join(u)].count(naked)>1)
     
     # Eliminate the naked twins as possibilities for their peers

@@ -104,7 +104,7 @@ def eliminate(values):
             assign_value(values, peer, values[peer].replace(digit,'')) 
             #values[peer] = (values[peer].replace(digit,''))
             return values
-    pass
+    #pass
     #raise NotImplementedError
 
 

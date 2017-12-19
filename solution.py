@@ -29,7 +29,7 @@ def naked_twins(values):
                     for box2 in peers[box1] \
                     if set(values[box1])==set(values[box2]) ]
 
-    for box in unit:
+    for box in unitlist_orginal:
         if (box in naked_twins):
             # These 2 boxes must have only these 2 values
             assign_value(values, box, values[box]) #values[box] = digits

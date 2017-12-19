@@ -29,7 +29,7 @@ def naked_twins(values):
     # then we use those values and isolate only the ones that appears more than once on the board: our candidates
     for unit in row_units + column_units + square_units:
         d = dict()
-        for digit in all_digits:
+        for digit in cols:
             # get all boxes in the unit that have the digit
             boxes_with_digit = ''.join([box for box in unit if digit in values[box]])
             # if a digit is only in 2 boxes:

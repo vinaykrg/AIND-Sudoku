@@ -36,8 +36,8 @@ def naked_twins(values):
                             
     else:
     # The rest of the boxes cannot have these digits
-    assign_value(values, box, values[box].replace(digits[0], ""))
-    assign_value(values, box, values[box].replace(digits[1], ""))
+        assign_value(values, box, values[box].replace(digits[0], ""))
+        assign_value(values, box, values[box].replace(digits[1], ""))
     
 
 def eliminate(values):

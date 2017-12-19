@@ -32,7 +32,8 @@ def naked_twins(values):
         d = dict()
         for digit in box_allvalues:
             # get all boxes in the unit that have the values
-            boxes_with_digit = ''.join([box for box in values.keys() if len(values[box]) == 2])
+            #boxes_with_digit = ''.join([box for box in values.keys() if len(values[box]) == 2])
+            boxes_with_digit = ''.join([box for box in unit if digit in values[box]])
             # if a digit is only in 2 boxes:
             if len(boxes_with_digit) == 4:
                 # Insert the concatenated boxes names as the key in a dictionary with digit as the value 

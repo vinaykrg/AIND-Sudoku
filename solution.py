@@ -52,29 +52,33 @@ def naked_twins(values):
 
     all_digits = '123456789'
     
-    all_match = [values[box] for box in values.keys() if len(values[box]) == 2]
-    # Collect boxes that have the same elements
-    #naked_twins = [[box1,box2] for box1 in all_match \
-    #                for box2 in peers[box1] \
-    #                if set(values[box1])==set(values[box2]) ]
+    for unit in row_units + column_units + square_units:
+        d = dict()
+        for digit in all_digits:
+            # get all boxes in the unit that have the digit
+            boxes_with_digit = ''.join([box for box in unit if digit in values[box]])
+            # if a digit is only in 2 boxes:
+            if len(boxes_with_digit) == 4:
+                # Insert the concatenated boxes names as the key in a dictionary with digit as the value 
+                if (boxes_with_digit not in d.keys()): 
+                    # print('inserting:', digit, ' in ', boxes_with_digit)
+                    d[boxes_with_digit] = digit
+                # If the concatenated boxes names are already in the dictionary, we have a twin!
+                else:
+                    digits = d[boxes_with_digit] + digit
+                    # print('updating:', digits, ' in ', boxes_with_digit)
 
-    match_more_than_one = [selected_match for selected_match in all_match if all_match.count(selected_match)>1]
-
-    # For each pair of naked twins,
-    for i in range(len(match_more_than_one)):
-        box1 = match_more_than_one[i][0]
-        box2 = match_more_than_one[i][1]
-        # 1- compute intersection of peers
-        peers1 = set(peers[box1])
-        peers2 = set(peers[box2])
-        #matching_peers = peers[match_more_than_one[i][0]] & peers[match_more_than_one[i][1]
-        peers_int = peers1 & peers2
-        #peers_int = set(peers[match_more_than_one[i][0]]) & set(peers[match_more_than_one[i][1]])
-        # 2- Delete the two digits in naked twins from all common peers.
-        for peer_val in peers_int:
-            if len(values[peer_val])>2:
-                for rm_val in values[box1]:
-                    values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
+                    for box in unit:
+                        if (box in boxes_with_digit):
+                            # These 2 boxes must have only these 2 values
+                            assign_value(values, box, digits) #values[box] = digits
+                            
+                        else:
+                            # The rest of the boxes cannot have these digits
+                            assign_value(values, box, values[box].replace(digits[0], ""))
+                            assign_value(values, box, values[box].replace(digits[1], ""))
+                            # values[box] = values[box].replace(digits[0], "")
+                            # values[box] = values[box].replace(digits[1], "")
     return values
     #raise NotImplementedError
 

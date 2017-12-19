@@ -40,7 +40,7 @@ def naked_twins(values):
 
 
 
-    naked_twins = [[box1,box2] for box1 in candidate_naked_twins_values \
+    naked_twins = [[box1,box2] for box1 in all_possible_naked_twins_values \
                     for box2 in peers[box1] \
                     if set(values[box1])==set(values[box2]) ]
 

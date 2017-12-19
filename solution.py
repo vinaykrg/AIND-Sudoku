@@ -32,7 +32,7 @@ def naked_twins(values):
         d = dict()
         for digit in box_allvalues:
             # get all boxes in the unit that have the values
-            potential_twin = [box for box in values.keys() if len(values[box]) == 2]
+            potential_twin = [box for box in unit if digit in values[box]]
             boxes_with_digit = ''.join(potential_twin)
             # if a digit is only in 2 boxes:
             if len(boxes_with_digit) == 4:

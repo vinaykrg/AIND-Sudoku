@@ -66,8 +66,8 @@ column_units = [cross(rows, c) for c in cols]
 square_units = [cross(r, c) for r in ('ABC','DEF','GHI') for c in ('123','456','789')]
 #diag1 = [[str(r)+str(10- int(c)) for (r,c) in zip(rows,cols)]]
 #diag2 = [[r+c for (r,c) in zip(rows,cols)]]
-diagonal_units_1 = ['A1', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'I9']
-diagonal_units_2 = ['I1', 'H2', 'G3', 'F4', 'E5', 'D6', 'C7', 'B8', 'A9']
+diagonal_units_1 = [['A1', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'I9']
+diagonal_units_2 = [['I1', 'H2', 'G3', 'F4', 'E5', 'D6', 'C7', 'B8', 'A9'[]]
 #unitlist = row_units + column_units + square_units + diag1 + diag2
 unitlist = row_units + column_units + square_units + diagonal_units_1 + diagonal_units_2
 

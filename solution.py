@@ -23,26 +23,27 @@ peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 
 
 def naked_twins(values):
-    all_match = [values[box] for box in values.keys() if len(values[box]) == 2]
-    match_more_than_one = [selected_match for selected_match in all_match if all_match.count(selected_match)>1]
+# First select boxes with 2 entries
+    potential_twins = [box for box in values.keys() if len(values[box]) == 2]
+    # Collect boxes that have the same elements
+    naked_twins = [[box1,box2] for box1 in potential_twins \
+                    for box2 in peers[box1] \
+                    if set(values[box1])==set(values[box2]) ]
 
     # For each pair of naked twins,
-    for i in range(len(match_more_than_one)):
-        box1 = match_more_than_one[i][0]
-        box2 = match_more_than_one[i][1]
+    for i in range(len(naked_twins)):
+        box1 = naked_twins[i][0]
+        box2 = naked_twins[i][1]
         # 1- compute intersection of peers
         peers1 = set(peers[box1])
         peers2 = set(peers[box2])
-        #matching_peers = peers[match_more_than_one[i][0]] & peers[match_more_than_one[i][1]
         peers_int = peers1 & peers2
-        #peers_int = set(peers[match_more_than_one[i][0]]) & set(peers[match_more_than_one[i][1]])
         # 2- Delete the two digits in naked twins from all common peers.
         for peer_val in peers_int:
             if len(values[peer_val])>2:
                 for rm_val in values[box1]:
                     values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
     return values
-    #raise NotImplementedError
     
 
 def eliminate(values):

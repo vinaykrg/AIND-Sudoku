@@ -31,20 +31,20 @@ def naked_twins(values):
     #                if set(values[box1])==set(values[box2]) ]
 
 
-#   if all_possible_naked_twins_values.count(candidate)>1:
-#       candidate_naked_twins_values = [candidate for candidate in all_possible_naked_twins_values]
+    if all_possible_naked_twins_values.count(candidate)>1:
+        candidate_naked_twins_values = [candidate for candidate in all_possible_naked_twins_values]
 
 #   units_with_candidates = [u for u in unitlist for candidate in candidate_naked_twins_values for s in u
 #                           if values[s]==candidate]
 
 
     # we first find all possible naked twins values on the board
-    all_possible_naked_twins_values = [values[box] for box in values.keys()
-                                       if len(values[box]) == 2]
+#    all_possible_naked_twins_values = [values[box] for box in values.keys()
+#                                       if len(values[box]) == 2]
 
     # then we use those values and isolate only the ones that appears more than once on the board: our candidates
-    candidate_naked_twins_values = [candidate for candidate in all_possible_naked_twins_values
-                                    if all_possible_naked_twins_values.count(candidate)>1]
+ #   candidate_naked_twins_values = [candidate for candidate in all_possible_naked_twins_values
+ #                                   if all_possible_naked_twins_values.count(candidate)>1]
 
     # with our candidates, we iterate through our unitlist and find units that have square with the candidate values
     units_with_candidates = [u for u in unitlist for candidate in candidate_naked_twins_values for s in u

@@ -14,6 +14,7 @@ diagonal_units_1 = [['A1', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'I9']]
 diagonal_units_2 = [['I1', 'H2', 'G3', 'F4', 'E5', 'D6', 'C7', 'B8', 'A9']]
 unitlist = row_units + column_units + square_units + diagonal_units_1 + diagonal_units_2
 unitlist_orginal = row_units + column_units + square_units
+box_allvalues = '123456789'
 
 # TODO: Update the unit list to add the new diagonal units
 unitlist = unitlist
@@ -29,7 +30,7 @@ def naked_twins(values):
     # then we use those values and isolate only the ones that appears more than once on the board: our candidates
     for unit in unitlist_orginal:
         d = dict()
-        for digit in cols:
+        for digit in box_allvalues:
             # get all boxes in the unit that have the values
             boxes_with_digit = ''.join([box for box in unit if digit in values[box]])
             # if a digit is only in 2 boxes:

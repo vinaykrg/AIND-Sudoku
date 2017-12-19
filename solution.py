@@ -23,9 +23,6 @@ peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 
 
 def naked_twins(values):
-    all_digits = '123456789'
-   
-# First select boxes with 2 entries
     potential_twins = [box for box in values.keys() if len(values[box]) == 2]
     # Collect boxes that have the same elements
     naked_twins = [[box1,box2] for box1 in potential_twins \

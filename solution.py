@@ -22,6 +22,9 @@ peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 
 
 def naked_twins(values):
+    all_match = [values[box] for box in values.keys() if len(values[box]) == 2]
+    match_more_than_one = [selected_match for selected_match in all_match if all_match.count(selected_match)>1]
+
     """Eliminate values using the naked twins strategy.
 
     Parameters
@@ -58,8 +61,7 @@ def naked_twins(values):
                     if set(values[box1])==set(values[box2]) ]
 """
 #-------------------------------------------------------------------------------------------------------
-    all_match = [values[box] for box in values.keys() if len(values[box]) == 2]
-    match_more_than_one = [selected_match for selected_match in all_match if all_match.count(selected_match)>1]
+    
 
 
     # For each pair of naked twins,

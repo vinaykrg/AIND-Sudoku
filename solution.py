@@ -23,7 +23,10 @@ unitlist = unitlist
 units = dict((s, [u for u in unitlist if s in u]) for s in boxes)
 peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 
-
+#
+#
+#
+#
 def naked_twins(values):
     """Eliminate values using the naked twins strategy.
 

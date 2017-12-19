@@ -33,7 +33,7 @@ def naked_twins(values):
         for digit in box_allvalues:
             # get all boxes in the unit that have the values
             potential_twin = [box for box in unit if digit in values[box]]
-
+            print(potential_twin)
             boxes_with_digit = ''.join(potential_twin)
             print(boxes_with_digit)
             print(len(boxes_with_digit))

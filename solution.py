@@ -33,14 +33,13 @@ def naked_twins(values):
         for digit in box_allvalues:
             # get all boxes in the unit that have the values
             potential_twin = [box for box in unit if digit in values[box]]
-            
+
             boxes_with_digit = ''.join(potential_twin)
-            print(boxes_with_digit)
+            print(len(boxes_with_digit))
             # if a digit is only in 2 boxes:
             if len(boxes_with_digit) == 4:
                 # Insert the concatenated boxes names as the key in a dictionary with digit as the value 
                 if (boxes_with_digit not in d.keys()): 
-                    print('inserting:', digit, ' in ', boxes_with_digit)
                     d[boxes_with_digit] = digit
                 # If the concatenated boxes names are already in the dictionary, we have a twin!
                 else:

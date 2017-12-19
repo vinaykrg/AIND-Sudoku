@@ -202,18 +202,15 @@ def search(values):
     if values is False:
         return False
     # Chose one of the unfilled square s with the fewest possibilities
-    unsolved_values = [box for box in values.keys() if len(values[box]) > 1]
-    # print(len(unsolved_values))
-    if len(unsolved_values) > 0:
+    not_solved = [box for box in values.keys() if len(values[box]) > 1]
+    if len(not_solved) > 0:
         box, vals = sorted(values.items(), key = lambda x: 10 if (len(x[1]) <= 1) else len(x[1]))[0]
-        # print(box, vals)
         for v in vals:
-            values_try = values.copy()
-            assign_value(values_try, box, v) 
-            # values_try[box] = v
-            solve_try = search(values_try)
-            if solve_try:
-                return solve_try
+            attempted_values = values.copy()
+            attempted_values[box] = v
+            attempted_sol = search(attempted_values)
+            if attempted_sol:
+                return attempted_sol
     else:
         return values
 

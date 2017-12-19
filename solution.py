@@ -29,7 +29,7 @@ def naked_twins(values):
     # For each pair of naked twins,
     for i in range(len(match_more_than_one)):
         box1 = match_more_than_one[i][0]
-        box2 = nmatch_more_than_one[i][1]
+        box2 = match_more_than_one[i][1]
         # 1- compute intersection of peers
         peers1 = set(peers[box1])
         peers2 = set(peers[box2])

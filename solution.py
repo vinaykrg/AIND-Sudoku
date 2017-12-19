@@ -62,11 +62,11 @@ def naked_twins(values):
 
     # For each pair of naked twins,
     for i in range(len(match_more_than_one)):
-        box1 = match_more_than_one[i][0]
-        box2 = match_more_than_one[i][1]
+        #box1 = match_more_than_one[i][0]   
+        #box2 = match_more_than_one[i][1]
         # 1- compute intersection of peers
-        peers1 = set(peers[box1])
-        peers2 = set(peers[box2])
+        peers1 = set(peers[match_more_than_one[i][0]])
+        peers2 = set(peers[match_more_than_one[i][1]])
         #matching_peers = peers[match_more_than_one[i][0]] & peers[match_more_than_one[i][1]
         peers_int = peers1 & peers2
         #peers_int = set(peers[match_more_than_one[i][0]]) & set(peers[match_more_than_one[i][1]])

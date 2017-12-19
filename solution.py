@@ -5,7 +5,9 @@ from utils import *
 row_units = [cross(r, cols) for r in rows]
 column_units = [cross(rows, c) for c in cols]
 square_units = [cross(rs, cs) for rs in ('ABC','DEF','GHI') for cs in ('123','456','789')]
-unitlist = row_units + column_units + square_units
+diagonal_units_1 = [['A1', 'B2', 'C3', 'D4', 'E5', 'F6', 'G7', 'H8', 'I9']]
+diagonal_units_2 = [['I1', 'H2', 'G3', 'F4', 'E5', 'D6', 'C7', 'B8', 'A9']]
+unitlist = row_units + column_units + square_units + diagonal_units_1 + diagonal_units_2
 
 # TODO: Update the unit list to add the new diagonal units
 unitlist = unitlist
@@ -62,7 +64,14 @@ def eliminate(values):
         The values dictionary with the assigned values eliminated from peers
     """
     # TODO: Copy your code from the classroom to complete this function
-    raise NotImplementedError
+    solved_values = [box for box in values.keys() if len(values[box]) == 1]
+    for box in solved_values:
+        digit = values[box]
+        for peer in peers[box]:
+            values[peer] = (values[peer].replace(digit,''))
+            return values
+    pass
+    #raise NotImplementedError
 
 
 def only_choice(values):
@@ -86,7 +95,13 @@ def only_choice(values):
     You should be able to complete this function by copying your code from the classroom
     """
     # TODO: Copy your code from the classroom to complete this function
-    raise NotImplementedError
+    for unit in unitlist:
+        for digit in cols:
+            Box_OneValue = [box for box in unit if digit in values[box]]
+            if len(Box_OneValue) == 1:
+                values[Box_OneValue[0]] = digit
+    return values
+    #raise NotImplementedError
 
 
 def reduce_puzzle(values):

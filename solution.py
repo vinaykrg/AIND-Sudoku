@@ -34,16 +34,14 @@ def naked_twins(values):
             # get all boxes in the unit that have the values
             potential_twin = [box for box in unit if digit in values[box]]
             #print(potential_twin)
-            
-            #peers2 = set(peers[box2])
-            #peers_int = peers1 & peers2
             boxes_with_digit = ''.join(potential_twin)
-                        #print(boxes_with_digit)
+            #print(boxes_with_digit)
             #print(len(boxes_with_digit))
             # if a digit is only in 2 boxes:
             if len(boxes_with_digit) == 4:
                 box_peers_1 = set(peers[boxes_with_digit[0:2]])
                 box_peers_2 = set(peers[boxes_with_digit[2:4]])
+                total_peers = box_peers_1 & box_peers_2
                 # Insert the concatenated boxes names as the key in a dictionary with digit as the value 
                 if (boxes_with_digit not in d.keys()): 
                     d[boxes_with_digit] = digit
@@ -54,6 +52,18 @@ def naked_twins(values):
                     digits = d[boxes_with_digit] + digit
                     # print('updating:', digits, ' in ', boxes_with_digit)
 
+                    for peer_val in total_peers:
+                        if len(values[peer_val])>2:
+                            for rm_val in values[box1]:
+                                values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
+
+
+
+
+
+
+
+                    """
                     for box in unit:
                         if (box in boxes_with_digit):
                             # These 2 boxes must have only these 2 values
@@ -65,6 +75,7 @@ def naked_twins(values):
                             assign_value(values, box, values[box].replace(digits[1], ""))
                             # values[box] = values[box].replace(digits[0], "")
                             # values[box] = values[box].replace(digits[1], "")
+                            """
     return values
 
 def eliminate(values):

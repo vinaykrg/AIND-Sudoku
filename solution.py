@@ -51,19 +51,6 @@ def naked_twins(values):
                 else:
                     digits = d[boxes_with_digit] + digit
                     # print('updating:', digits, ' in ', boxes_with_digit)
-
-                    for peer_val in unit:
-                        if len(values[peer_val])>2:
-                            for rm_val in values[boxes_with_digit[0:2]]:
-                                values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
-
-
-
-
-
-
-
-                    """
                     for box in unit:
                         if (box in boxes_with_digit):
                             # These 2 boxes must have only these 2 values
@@ -71,11 +58,14 @@ def naked_twins(values):
                             
                         else:
                             # The rest of the boxes cannot have these digits
-                            assign_value(values, box, values[box].replace(digits[0], ""))
-                            assign_value(values, box, values[box].replace(digits[1], ""))
-                            # values[box] = values[box].replace(digits[0], "")
-                            # values[box] = values[box].replace(digits[1], "")
-                            """
+                            #assign_value(values, box, values[box].replace(digits[0], ""))
+                            #assign_value(values, box, values[box].replace(digits[1], ""))                            
+                            for box in unit:
+                                if len(values[peer_val])>2:
+                                    for rm_val in values[boxes_with_digit[0:2]]:
+                                        values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
+
+
     return values
 
 def eliminate(values):

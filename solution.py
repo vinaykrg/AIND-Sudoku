@@ -79,7 +79,8 @@ def naked_twins(values):
                             
                         else:
                             # remove the value from remaining boxes
-                            values = assign_value(values, box, values[box].replace(digit,''))
+                            assign_value(values, box, values[box].replace(digits[0], ""))
+                            assign_value(values, box, values[box].replace(digits[1], ""))
                                                      
 
     return values

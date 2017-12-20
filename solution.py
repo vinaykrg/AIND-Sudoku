@@ -52,7 +52,7 @@ def naked_twins(values):
                     digits = d[boxes_with_digit] + digit
                     # print('updating:', digits, ' in ', boxes_with_digit)
 
-                    for peer_val in total_peers:
+                    for peer_val in unit:
                         if len(values[peer_val])>2:
                             for rm_val in values[boxes_with_digit[0:2]]:
                                 values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))

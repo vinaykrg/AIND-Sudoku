@@ -51,13 +51,11 @@ def naked_twins(values):
     strategy repeatedly).
     """
     # TODO: Implement this function!
-    # we first find all possible naked twins values on the board
-    all_possible_naked_twins_values = [values[box] for box in values.keys()
-                                       if len(values[box]) == 2]
+    # find all potential naked twins
+    all_possible_naked_twins_values = [values[box] for box in values.keys() if len(values[box]) == 2]
 
     # then we use those values and isolate only the ones that appears more than once on the board: our candidates
-    candidate_naked_twins_values = [candidate for candidate in all_possible_naked_twins_values
-                                    if all_possible_naked_twins_values.count(candidate)>1]
+    candidate_naked_twins_values = [candidate for candidate in all_possible_naked_twins_values if all_possible_naked_twins_values.count(candidate)>1]
 
     # with our candidates, we iterate through our unitlist and find units that have square with the candidate values
     units_with_candidates = [u for u in unitlist for candidate in candidate_naked_twins_values for s in u
@@ -89,8 +87,43 @@ def naked_twins(values):
                     # remove the digits from boxes that are not part of the naked-twins.  DONE!
                     values = assign_value(values, box, values[box].replace(digit,''))
     return values
-    #raise NotImplementedError
+    #-----------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------
+"""
+    for unit in unitlist_orginal:
+        naked_twin_units = dict()
+        for digit in box_allvalues:
+            # find all potential naked twins
+            potential_twin = [box for box in unit if digit in values[box]]
+            #print(potential_twin)
+            boxes_with_matching_value = ''.join(potential_twin)
+            #print(boxes_with_matching_value)
+            #print(len(boxes_with_matching_value))
+            # if a digit is only in 2 boxes:
+            if len(boxes_with_matching_value) == 4:
+                box_peers_1 = set(peers[boxes_with_matching_value[0:2]])
+                box_peers_2 = set(peers[boxes_with_matching_value[2:4]])
+                total_peers = box_peers_1 & box_peers_2
 
+                if (boxes_with_matching_value not in naked_twin_units.keys()):
+                #if (boxes_with_matching_value not in total_peers):
+                    naked_twin_units[boxes_with_matching_value] = digit
+
+                else:
+                    digits = naked_twin_units[boxes_with_matching_value] + digit
+                    for box in unit:
+                        if (box in boxes_with_matching_value):
+                            # These 2 boxes must have only these 2 values
+                            assign_value(values, box, digits) #values[box] = digits
+                            
+                        else:
+                            # remove the value from remaining boxes
+                            values = assign_value(values, box, values[box].replace(digit,''))
+                                                     
+
+    return values
+    #raise NotImplementedError
+"""
 def eliminate(values):
     """Apply the eliminate strategy to a Sudoku puzzle
 

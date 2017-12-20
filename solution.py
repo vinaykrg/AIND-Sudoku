@@ -54,7 +54,7 @@ def naked_twins(values):
 
                     for peer_val in total_peers:
                         if len(values[peer_val])>2:
-                            for rm_val in values[box1]:
+                            for rm_val in values[box]:
                                 values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
 
 

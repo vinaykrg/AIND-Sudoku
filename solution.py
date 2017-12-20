@@ -24,42 +24,65 @@ peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 
 
 def naked_twins(values):
-# First select boxes with 2 entries
-    #all_possible_naked_twins_values = [values[box] for box in values.keys() if len(values[box]) == 2]
+    """Eliminate values using the naked twins strategy.
 
-    # then we use those values and isolate only the ones that appears more than once on the board: our candidates
+    Parameters
+    ----------
+    values(dict)
+        a dictionary of the form {'box_name': '123456789', ...}
+
+    Returns
+    -------
+    dict
+        The values dictionary with the naked twins eliminated from peers
+
+    Notes
+    -----
+    Your solution can either process all pairs of naked twins from the input once,
+    or it can continue processing pairs of naked twins until there are no such
+    pairs remaining -- the project assistant test suite will accept either
+    convention. However, it will not accept code that does not process all pairs
+    of naked twins from the original input. (For example, if you start processing
+    pairs of twins and eliminate another pair of twins before the second pair
+    is processed then your code will fail the PA test suite.)
+
+    The first convention is preferred for consistency with the other strategies,
+    and because it is simpler (since the reduce_puzzle function already calls this
+    strategy repeatedly).
+    """
+    # TODO: Implement this function!
     for unit in unitlist_orginal:
         naked_twin_units = dict()
         for digit in box_allvalues:
             # find all potential naked twins
             potential_twin = [box for box in unit if digit in values[box]]
             #print(potential_twin)
-            boxes_with_digit = ''.join(potential_twin)
-            #print(boxes_with_digit)
-            #print(len(boxes_with_digit))
+            boxes_with_matching_value = ''.join(potential_twin)
+            #print(boxes_with_matching_value)
+            #print(len(boxes_with_matching_value))
             # if a digit is only in 2 boxes:
-            if len(boxes_with_digit) == 4:
-                box_peers_1 = set(peers[boxes_with_digit[0:2]])
-                box_peers_2 = set(peers[boxes_with_digit[2:4]])
+            if len(boxes_with_matching_value) == 4:
+                box_peers_1 = set(peers[boxes_with_matching_value[0:2]])
+                box_peers_2 = set(peers[boxes_with_matching_value[2:4]])
                 total_peers = box_peers_1 & box_peers_2
 
-                if (boxes_with_digit not in naked_twin_units.keys()): 
-                    naked_twin_units[boxes_with_digit] = digit
+                if (boxes_with_matching_value not in naked_twin_units.keys()): 
+                    naked_twin_units[boxes_with_matching_value] = digit
 
                 else:
-                    digits = naked_twin_units[boxes_with_digit] + digit
+                    digits = naked_twin_units[boxes_with_matching_value] + digit
                     for box in unit:
-                        if (box in boxes_with_digit):
+                        if (box in boxes_with_matching_value):
                             # These 2 boxes must have only these 2 values
                             assign_value(values, box, digits) #values[box] = digits
                             
                         else:
                             # remove the value from remaining boxes
                             values = assign_value(values, box, values[box].replace(digit,''))
-                            
-                            
+                                                     
 
     return values
+    #raise NotImplementedError
 
 def eliminate(values):
     """Apply the eliminate strategy to a Sudoku puzzle

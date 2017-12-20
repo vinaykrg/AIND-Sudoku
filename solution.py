@@ -51,7 +51,7 @@ def naked_twins(values):
     strategy repeatedly).
     """
     # TODO: Implement this function!
-    for unit in unitlist:
+    for unit in unitlist_orginal:
         naked_twin_units = dict()
         for digit in box_allvalues:
             # find all potential naked twins

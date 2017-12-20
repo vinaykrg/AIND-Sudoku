@@ -42,15 +42,12 @@ def naked_twins(values):
                 box_peers_1 = set(peers[boxes_with_digit[0:2]])
                 box_peers_2 = set(peers[boxes_with_digit[2:4]])
                 total_peers = box_peers_1 & box_peers_2
-                # Insert the concatenated boxes names as the key in a dictionary with digit as the value 
+
                 if (boxes_with_digit not in d.keys()): 
                     d[boxes_with_digit] = digit
-                    # 1- compute intersection of peers
 
-                # If the concatenated boxes names are already in the dictionary, we have a twin!
                 else:
                     digits = d[boxes_with_digit] + digit
-                    # print('updating:', digits, ' in ', boxes_with_digit)
                     for box in unit:
                         if (box in boxes_with_digit):
                             # These 2 boxes must have only these 2 values
@@ -58,8 +55,9 @@ def naked_twins(values):
                             
                         else:
                             # The rest of the boxes cannot have these digits
-                            assign_value(values, box, values[box].replace(digits[0], ""))
-                            assign_value(values, box, values[box].replace(digits[1], ""))                            
+                            values = assign_value(values, box, values[box].replace(digit,''))
+                            #assign_value(values, box, values[box].replace(digits[0], ""))
+                            #assign_value(values, box, values[box].replace(digits[1], ""))                            
                             
 
     return values

@@ -58,13 +58,9 @@ def naked_twins(values):
                             
                         else:
                             # The rest of the boxes cannot have these digits
-                            #assign_value(values, box, values[box].replace(digits[0], ""))
-                            #assign_value(values, box, values[box].replace(digits[1], ""))                            
-                            for box in unit:
-                                if len(values[peer_val])>2:
-                                    for rm_val in values[boxes_with_digit[0:2]]:
-                                        values = assign_value(values, peer_val, values[peer_val].replace(rm_val,''))
-
+                            assign_value(values, box, values[box].replace(digits[0], ""))
+                            assign_value(values, box, values[box].replace(digits[1], ""))                            
+                            
 
     return values
 

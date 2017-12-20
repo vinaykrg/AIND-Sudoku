@@ -67,7 +67,7 @@ def naked_twins(values):
                 total_peers = box_peers_1 & box_peers_2
 
                 #if (boxes_with_matching_value not in naked_twin_units.keys()):
-                if (boxes_with_matching_value not in total_peers.keys()):
+                if (boxes_with_matching_value not in box_peers_1.keys() and not in box_peers_2.keys()):
                     naked_twin_units[boxes_with_matching_value] = digit
 
                 else:

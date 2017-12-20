@@ -51,38 +51,43 @@ def naked_twins(values):
     strategy repeatedly).
     """
     # TODO: Implement this function!
-    for unit in unitlist_orginal:
-        naked_twin_units = dict()
-        for digit in box_allvalues:
-            # find all potential naked twins
-            potential_twin = [box for box in unit if digit in values[box]]
-            #print(potential_twin)
-            boxes_with_matching_value = ''.join(potential_twin)
-            #print(boxes_with_matching_value)
-            #print(len(boxes_with_matching_value))
-            # if a digit is only in 2 boxes:
-            if len(boxes_with_matching_value) == 4:
-                box_peers_1 = set(peers[boxes_with_matching_value[0:2]])
-                box_peers_2 = set(peers[boxes_with_matching_value[2:4]])
-                total_peers = box_peers_1 & box_peers_2
+    # we first find all possible naked twins values on the board
+    all_possible_naked_twins_values = [values[box] for box in values.keys()
+                                       if len(values[box]) == 2]
 
-                if (boxes_with_matching_value not in naked_twin_units.keys()):
-                #if (boxes_with_matching_value not in total_peers):
-                    naked_twin_units[boxes_with_matching_value] = digit
+    # then we use those values and isolate only the ones that appears more than once on the board: our candidates
+    candidate_naked_twins_values = [candidate for candidate in all_possible_naked_twins_values
+                                    if all_possible_naked_twins_values.count(candidate)>1]
 
-                else:
-                    digits = naked_twin_units[boxes_with_matching_value] + digit
-                    for box in unit:
-                        if (box in boxes_with_matching_value):
-                            # These 2 boxes must have only these 2 values
-                            assign_value(values, box, digits) #values[box] = digits
-                            
-                        else:
-                            # remove the value from remaining boxes
-                            assign_value(values, box, values[box].replace(digits[0], ""))
-                            assign_value(values, box, values[box].replace(digits[1], ""))
-                                                     
+    # with our candidates, we iterate through our unitlist and find units that have square with the candidate values
+    units_with_candidates = [u for u in unitlist for candidate in candidate_naked_twins_values for s in u
+                             if values[s]==candidate]
 
+    # once we isolated the possible units with our candidate values, we get a list of all values for that unit
+    units_with_candidates_values_list = dict(("+".join(u), [values[s] for s in u]) for u in units_with_candidates)
+
+    # with the unit value list, we confirm our naked-twins by verifying that they occur more than once in a unit
+    #    and add them to our list.
+    naked_twin_list = [twins for twins in candidate_naked_twins_values for u in units_with_candidates
+                       if units_with_candidates_values_list["+".join(u)].count(twins)>1] 
+
+    # with the confirmed set of naked-twins, we search the units that have them and add them to a dictionary
+    units_with_naked_twins = dict(("+".join(u),naked) for u in units_with_candidates for naked in naked_twin_list
+                                   if units_with_candidates_values_list["+".join(u)].count(naked)>1)
+    
+    # Eliminate the naked twins as possibilities for their peers
+    # we already have the list of units and the naked-twins associated with them in our dictionary
+    for naked_unit in units_with_naked_twins.keys():
+        naked = units_with_naked_twins[naked_unit]
+
+        # we just need to iterate through them and for squares that are not the ones with the naked-twins values,
+        for box in naked_unit.split('+'):
+
+            # if the boxes are not part of the naked-twins.
+            if values[box] != naked:
+                for digit in naked:
+                    # remove the digits from boxes that are not part of the naked-twins.  DONE!
+                    values = assign_value(values, box, values[box].replace(digit,''))
     return values
     #raise NotImplementedError
 

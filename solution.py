@@ -34,7 +34,7 @@ def naked_twins(values):
             # get all boxes in the unit that have the values
             potential_twin = [box for box in unit if digit in values[box]]
             #print(potential_twin)
-            potential_twin_peers = set(peers[potential_twin])
+            potential_twin_peers = peers[potential_twin]
             #peers2 = set(peers[box2])
             #peers_int = peers1 & peers2
             boxes_with_digit = ''.join(potential_twin)

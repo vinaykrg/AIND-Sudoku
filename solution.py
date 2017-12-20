@@ -34,7 +34,7 @@ def naked_twins(values):
             # get all boxes in the unit that have the values
             potential_twin = [box for box in unit if digit in values[box]]
             #print(potential_twin)
-            potential_twin_peers = peers[potential_twin]
+            
             #peers2 = set(peers[box2])
             #peers_int = peers1 & peers2
             boxes_with_digit = ''.join(potential_twin)
@@ -45,6 +45,7 @@ def naked_twins(values):
                 # Insert the concatenated boxes names as the key in a dictionary with digit as the value 
                 if (boxes_with_digit not in d.keys()): 
                     d[boxes_with_digit] = digit
+                    potential_twin_peers = peers[boxes_with_digit]
                 # If the concatenated boxes names are already in the dictionary, we have a twin!
                 else:
                     digits = d[boxes_with_digit] + digit

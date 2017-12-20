@@ -29,9 +29,9 @@ def naked_twins(values):
 
     # then we use those values and isolate only the ones that appears more than once on the board: our candidates
     for unit in unitlist_orginal:
-        d = dict()
+ #       d = dict()
         for digit in box_allvalues:
-            # get all boxes in the unit that have the values
+            # find all potential naked twins
             potential_twin = [box for box in unit if digit in values[box]]
             #print(potential_twin)
             boxes_with_digit = ''.join(potential_twin)
@@ -54,10 +54,9 @@ def naked_twins(values):
                             assign_value(values, box, digits) #values[box] = digits
                             
                         else:
-                            # The rest of the boxes cannot have these digits
+                            # remove the value from remaining boxes
                             values = assign_value(values, box, values[box].replace(digit,''))
-                            #assign_value(values, box, values[box].replace(digits[0], ""))
-                            #assign_value(values, box, values[box].replace(digits[1], ""))                            
+                            
                             
 
     return values
